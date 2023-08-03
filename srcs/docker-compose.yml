@@ -1,0 +1,62 @@
+version: "3.8" # Docker Compose 버전
+
+networks:
+  intra: # 'intra'라는 이름의 Docker 브리지 네트워크를 정의
+    driver: bridge
+    name: intra
+
+volumes:
+  md-data: # 'md-data'라는 이름의 로컬 볼륨을 정의
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/ejachoi/data/mariadb
+  wp-data: # 'wp-data'라는 이름의 로컬 볼륨을 정의
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/ejachoi/data/wordpress
+
+services:
+  mariadb: # 'mariadb' 서비스 정의
+    container_name: mariadb # 컨테이너의 이름
+    build: ./requirements/mariadb # 마리아디비 서비스에 대한 Dockerfile의 경로
+    volumes:
+      - md-data:/var/lib/mysql # mariadb 컨테이너 내부의 '/var/lib/mysql' 디렉터리에 'md-data' 볼륨을 마운트
+    networks:
+      - intra # 'intra' 네트워크에 연결
+    env_file:
+      - .env # 환경 변수 파일 (.env)을 사용하여 컨테이너 환경 변수 설정
+    restart: always # 컨테이너 재시작 정책
+
+  wordpress: # 'wordpress' 서비스 정의
+    depends_on:
+      - mariadb # 'mariadb' 서비스가 먼저 시작되어야 함
+    container_name: wordpress # 컨테이너의 이름
+    build: requirements/wordpress # 워드프레스 서비스에 대한 Dockerfile의 경로
+    volumes:
+      - wp-data:/var/www/html/wordpress # wordpress 컨테이너 내부의 '/var/www/html/wordpress' 디렉터리에 'wp-data' 볼륨을 마운트
+    networks:
+      - intra # 'intra' 네트워크에 연결
+    env_file:
+      - .env # 환경 변수 파일 (.env)을 사용하여 컨테이너 환경 변수 설정
+    restart: always # 컨테이너 재시작 정책
+    expose:
+      - "9000" # 워드프레스 컨테이너에서 노출할 포트 번호
+
+  nginx: # 'nginx' 서비스 정의
+    depends_on:
+      - wordpress # 'wordpress' 서비스가 먼저 시작되어야 함
+    container_name: nginx # 컨테이너의 이름
+    build: requirements/nginx # Nginx 서비스에 대한 Dockerfile의 경로
+    volumes:
+      - wp-data:/var/www/html/wordpress # nginx 컨테이너 내부의 '/var/www/html/wordpress' 디렉터리에 'wp-data' 볼륨을 마운트
+    networks:
+      - intra # 'intra' 네트워크에 연결
+    env_file:
+      - .env # 환경 변수 파일 (.env)을 사용하여 컨테이너 환경 변수 설정
+    restart: always # 컨테이너 재시작 정책
+    ports:
+      - "443:443" # 호스트의 443 포트와 컨테이너의 443 포트를 매핑
