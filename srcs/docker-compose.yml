@@ -11,13 +11,13 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /home/ejachoi/data/mariadb
+      device: /home/dayun/data/mariadb
   wp-data: # 'wp-data'라는 이름의 로컬 볼륨을 정의
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/ejachoi/data/wordpress
+      device: /home/dayun/data/wordpress
 
 services:
   mariadb: # 'mariadb' 서비스 정의

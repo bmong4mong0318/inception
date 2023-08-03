@@ -1,13 +1,13 @@
 #!/bin/bash
 
-volume_path="/home/ejachoi/data"
+volume_path="/home/dayun/data"
 if [ "$(uname)" == "Darwin" ]; then
-    volume_path="/Users/ejachoi/goinfree/docker_study/inception2/data"
+    volume_path="/Users/dayun/goinfree/docker_study/inception2/data"
 fi
 wordpress_path="${volume_path}/wordpress"
 mariadb_path="${volume_path}/mariadb"
 
-conf="127.0.0.1 ejachoi.42.fr"
+conf="127.0.0.1 dayun.42.fr"
 hosts_path="/etc/hosts"
 
 # Define color codes

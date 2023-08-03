@@ -4,7 +4,7 @@ RED='\033[1;31m'
 GREEN='\033[1;32m'
 RESET='\033[0m'
 
-conf="127.0.0.1 ejachoi.42.fr"
+conf="127.0.0.1 dayun.42.fr"
 hosts_path="/etc/hosts"
 
 if [ ! -e "${hosts_path}" ]; then
