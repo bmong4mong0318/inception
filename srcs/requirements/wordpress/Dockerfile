@@ -29,5 +29,5 @@ WORKDIR /var/www/html/wordpress
 # 포트 노출
 EXPOSE 9000
 
-# 진입점 설정
+# 진입점 실정
 ENTRYPOINT ["sh", "/setup.sh"]

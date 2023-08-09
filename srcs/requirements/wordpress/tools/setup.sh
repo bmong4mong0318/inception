@@ -9,14 +9,14 @@ RESET='\033[0m'
 i=0
 while ! mysqladmin -h$MYSQL_HOST -u$MYSQL_USER -p$MYSQL_PASSWORD ping >/dev/null 2>&1; do
   if [ $i -eq 0 ]; then
-    echo "${YELLOW}MariaDB 서버의 동작을 대기 중입니다 ...${RESET}"
+    echo "${YELLOW}Waiting for MariaDB at Wordpress ...${RESET}"
   else
-    echo "${YELLOW}MariaDB 서버의 동작을 대기 중입니다 ... ${i}${RESET}"
+    echo "${YELLOW}Waiting for MariaDB at Wordpress ... ${i}${RESET}"
   fi
   sleep 5
   i=$(($i+1))
 done
-echo "${GREEN}MariaDB 서버의 동작을 대기 완료했습니다.${RESET}"
+echo "${GREEN}Waiting for MariaDB at Wordpress ... done${RESET}"
 
 # WordPress 코어 다운로드
 wp-cli core download --allow-root
@@ -38,8 +38,8 @@ wp-cli theme activate astra --allow-root
 # 완료 메시지 출력
 cat <<EOM
 ${GREEN}--------------------
-워드프레스 설치가 완료되었습니다.
-포트: 9000
+Wordpress setup has been completed.
+Port: 9000
 --------------------${RESET}
 EOM
 

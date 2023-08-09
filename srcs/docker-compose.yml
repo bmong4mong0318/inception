@@ -22,7 +22,7 @@ volumes:
 services:
   mariadb: # 'mariadb' 서비스 정의
     container_name: mariadb # 컨테이너의 이름
-    build: ./requirements/mariadb # 마리아디비 서비스에 대한 Dockerfile의 경로
+    build: ./requirements/mariadb # mariadb 서비스에 대한 Dockerfile의 경로
     volumes:
       - md-data:/var/lib/mysql # mariadb 컨테이너 내부의 '/var/lib/mysql' 디렉터리에 'md-data' 볼륨을 마운트
     networks:
@@ -37,7 +37,7 @@ services:
     container_name: wordpress # 컨테이너의 이름
     build: requirements/wordpress # 워드프레스 서비스에 대한 Dockerfile의 경로
     volumes:
-      - wp-data:/var/www/html/wordpress # wordpress 컨테이너 내부의 '/var/www/html/wordpress' 디렉터리에 'wp-data' 볼륨을 마운트
+      - wp-data:/var/www/html/wordpress # mariadb 컨테이너 내부의 '/var/lib/mysql' 디렉터리에 'md-data' 볼륨을 마운트
     networks:
       - intra # 'intra' 네트워크에 연결
     env_file:
