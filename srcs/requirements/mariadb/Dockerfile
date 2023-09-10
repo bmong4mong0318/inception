@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM debian:bullseye
 
 # 패키지 업데이트 및 MariaDB 설치, 불필요한 패키지 삭제
 RUN apt-get update && \

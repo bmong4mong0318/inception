@@ -1,0 +1,1 @@
+echo '127.0.0.1 dayun.42.fr' | sudo tee -a /etc/hosts

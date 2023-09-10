@@ -21,6 +21,8 @@ volumes:
 
 services:
   mariadb: # 'mariadb' 서비스 정의
+    image: mariadb
+    pull_policy: never
     container_name: mariadb # 컨테이너의 이름
     build: ./requirements/mariadb # mariadb 서비스에 대한 Dockerfile의 경로
     volumes:
@@ -32,6 +34,8 @@ services:
     restart: always # 컨테이너 재시작 정책
 
   wordpress: # 'wordpress' 서비스 정의
+    image: wordpress
+    pull_policy: never
     depends_on:
       - mariadb # 'mariadb' 서비스가 먼저 시작되어야 함
     container_name: wordpress # 컨테이너의 이름
@@ -47,6 +51,8 @@ services:
       - "9000" # 워드프레스 컨테이너에서 노출할 포트 번호
 
   nginx: # 'nginx' 서비스 정의
+    image: nginx
+    pull_policy: never
     depends_on:
       - wordpress # 'wordpress' 서비스가 먼저 시작되어야 함
     container_name: nginx # 컨테이너의 이름

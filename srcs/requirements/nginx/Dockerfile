@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM debian:bullseye
 
 # SSL 인증서를 저장할 디렉토리 생성
 RUN apt-get update && \
