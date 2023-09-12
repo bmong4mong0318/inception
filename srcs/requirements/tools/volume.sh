@@ -7,7 +7,6 @@ fi
 wordpress_path="${volume_path}/wordpress"
 mariadb_path="${volume_path}/mariadb"
 
-# Define color codes
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 NC='\033[0m' # No Color
