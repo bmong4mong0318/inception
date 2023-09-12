@@ -10,7 +10,7 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
     ln -sf /usr/local/bin/wp-cli.phar /usr/local/bin/wp-cli
 
 RUN mkdir -p /var/www/html/wordpress /run/php && \
-    usermod -G www-data -a www-data && \
+    usermod -G www-data -a www-data &&
 
 COPY ./conf/www.conf /etc/php/7.4/fpm/pool.d/www.conf
 COPY ./tools/setup.sh /setup.sh
