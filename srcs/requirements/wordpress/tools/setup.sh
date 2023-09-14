@@ -24,8 +24,6 @@ wp-cli theme install astra --allow-root
 wp-cli theme update astra --allow-root
 wp-cli theme activate astra --allow-root
 
-chown -R www-data:www-data /var/www/html/wordpress
-
 cat <<EOM
 ${GREEN}--------------------
 Wordpress setup has been completed.
